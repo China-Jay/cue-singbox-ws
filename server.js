@@ -9,7 +9,7 @@ const SB_VERSION = '1.14.4';
 const SB_SYSTEM = '/usr/local/bin/sing-box';
 const SB_LOCAL = '/tmp/sing-box';
 let SB_BIN = SB_SYSTEM;
-const TARBALL_URL = 'https://github.com/SagerNet/sing-box/releases/download/v' + SB_VERSION + '/sing-box-' + SB_VERSION + '-linux-amd64.tar.gz';
+const TARBALL_URL = 'https://github.com/SagerNet/sing-box/releases/download/v' + SB_VERSION + '/sing-box-' + SB_VERSION + '-linux-amd64-musl.tar.gz';
 
 function download(url, dest) {
   return new Promise((resolve, reject) => {
@@ -45,7 +45,7 @@ async function setup() {
     if (!fs.existsSync(SB_BIN)) {
       console.log('[cue] downloading sing-box v' + SB_VERSION + ' ...');
       await download(TARBALL_URL, '/tmp/sb.tar.gz');
-      execSync('tar -xzOf /tmp/sb.tar.gz sing-box-' + SB_VERSION + '-linux-amd64/sing-box > ' + SB_BIN, { stdio: 'inherit' });
+      execSync('tar -xzOf /tmp/sb.tar.gz sing-box-' + SB_VERSION + '-linux-amd64-musl/sing-box > ' + SB_BIN, { stdio: 'inherit' });
       fs.chmodSync(SB_BIN, 0o755);
       console.log('[cue] sing-box installed');
     }
